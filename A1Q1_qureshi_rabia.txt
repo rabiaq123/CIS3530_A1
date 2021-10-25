@@ -1,0 +1,43 @@
+CIS3530 Assignment 1, Question 1
+Rabia Qureshi (1046427)
+Date: October 21, 2021
+
+
+1a) Result := σ cNum=3530 (Offering)
+
+1b) R1 := σ year=2016 and dept='CIS' (Course ⨝ Offering)
+    Result := π cNum,term,name (R1)
+
+1c) R1 := σ instructor='Ritu' (Course ⨝ Offering)
+    Result := π cNum,name (R1)
+
+1d) R1 := σ cNum=3530 and year=2017 and term='F' (Student ⨝ Offering ⨝ Took)
+    Result := π sID,firstName,lastName,email,cgpa (R1)
+
+1e) R1 := σ cNum=3530 and dept='CIS' (Student ⨝ Offering ⨝ Took)
+    R2 := π sID,firstName,lastName,email,cgpa (R1)
+    Result := Student - R2
+
+1f) R1 := σ dept='HIS' (Student ⨝ Offering ⨝ Took)
+    Result := π sID,firstName,lastName,email,cgpa (R1)
+
+1g) R1 := ρ o1 (Offering) ⨯ ρ o2 (Offering)
+    R2 := σ o1.cNum=o2.cNum and o1.dept<o2.dept (R1)
+    Result := π o1.cNum,o1.dept,o2.cNum,o2.dept (R2)
+
+1h) R2 := Course ⟕ Offering
+    Result := π name,cNum,dept,year,term (R2)
+    NOTE FOR INFO ON OUTER JOIN --> https://www.geeksforgeeks.org/inner-join-vs-outer-join/
+
+1i) List all CIS instructors who did not teach Chris in CIS courses in 2017.
+    R1 = σ firstName='Chris' and dept='CIS' and year=2017 (Student ⨝ Offering ⨝ Took)
+    R2 = π instructor (R1)
+    R3 = σ dept='CIS' (Offering)
+    R4 = π instructor (R3)
+    R4-R2
+    EXPECTED OUTPUT:
+    Offering.instructor
+    -------------------
+        'Amit'
+        'Mylopoulos'
+        'Miller'
